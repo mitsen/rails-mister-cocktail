@@ -1,0 +1,29 @@
+<div class="container">
+ <div class="background-image" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url(' <%= image_path "whiskey3.jpg" %>');">
+  <div class="something">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+        <h1><%= @cocktail.name %></h1>
+        <ul class="list-inline" style="list-style: none;">
+          <% @cocktail.doses.each do |dose| %>
+          <li class="list-inline-item"> <%= dose.description %> of <%= dose.ingredient.name %> - <%= link_to "Delete", dose_path(dose), method: :delete %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+       </div>
+      <div class="wrapper">
+        <div>
+          <h4>Add Ingredients</h4>
+          <%= simple_form_for( [@cocktail, @dose] ) do |f| %>
+          <p><%= f.input :description, placeholder: 'Add a dose' %></p>
+          <%= f.association :ingredient %>
+          <%= f.submit "Add", class: "transparent" %>
+          <% end %>
+        </div>
+              <%= link_to 'Back', cocktails_path  %>
+
+    </div>
+  </div>
+</div>
+
